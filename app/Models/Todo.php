@@ -20,12 +20,4 @@ class Todo extends Model
         'checked',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'remember_token',
-    ];
 }
