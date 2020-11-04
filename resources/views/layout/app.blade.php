@@ -21,7 +21,7 @@
       @show
 
       <div class="row">
-        <div class="d-flex justify-content-center col-md-12 order-md-1">
+        <div class="col-md-12 order-md-1">
           @yield('content')
         </div>
       </div>

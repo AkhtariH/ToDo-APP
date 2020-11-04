@@ -16,7 +16,7 @@ class TodoController extends Controller
     {
         $todoList = Todo::latest()->paginate(5);
 
-        return view('list', compact('todoList'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('list', compact('todoList'));
     }
 
     /**
@@ -26,7 +26,7 @@ class TodoController extends Controller
      */
     public function create()
     {
-        //
+        return view('create');
     }
 
     /**
@@ -80,8 +80,11 @@ class TodoController extends Controller
      * @param  \App\Models\Todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Todo $todo)
+    public function destroy($id)
     {
-        //
+        $item = Todo::find($id);
+        $item->delete();
+
+        return redirect()->route('list.index')->with('success', 'Item was deleted!');
     }
 }
