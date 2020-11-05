@@ -17,7 +17,7 @@ class CreateTodosTable extends Migration
             $table->id();
             $table->string('value');
             $table->string('image_path')->nullable();
-            $table->boolean('checked');
+            $table->boolean('checked')->default(false);
             $table->timestamps();
         });
     }

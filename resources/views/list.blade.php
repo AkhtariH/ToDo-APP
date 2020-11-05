@@ -3,11 +3,10 @@
 @section('title', 'List')
 
 @section('content')
-    @if ($todoList != "")
+    @if ($todoList->count() > 0)
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col" width="100px">Check</th>
                     <th scope="col">Task</th>
                     <th scope="col" width="100px">Actions</th>
                 </tr>
@@ -15,8 +14,10 @@
             <tbody>
                 @foreach ($todoList as $item)
                     <tr>
-                        <td></td>
-                        <td>{{ $item->value }}</td>
+                        <td>
+                            <input type="checkbox" class="form-check-input" id="check-{{ $item->id }}" data-id="{{ $item->id }}" {{ $item->checked == true ? "checked" : "" }}>
+                            <label for="check-{{ $item->id }}" class="strikethrough">{{ $item->value }}</label>
+                        </td>
                         <td>
                             <a href="{{ route('list.edit', $item->id) }}">
                                 <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

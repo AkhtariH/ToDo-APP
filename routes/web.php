@@ -18,4 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('check', 'App\Http\Controllers\TodoController@check');
+
 Route::resource('list', TodoController::class);

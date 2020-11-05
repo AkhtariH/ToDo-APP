@@ -10,3 +10,29 @@
 nav > ul.pagination {
     justify-content: center !important;
 }
+
+input[type=checkbox] {
+  visibility: hidden;
+}
+
+input[type=checkbox] + .strikethrough {
+  color: black;
+  text-decoration: none;
+}
+  
+input[type=checkbox]:checked + .strikethrough {
+  color: gray;
+  text-decoration: line-through;
+}
+  
+
+label.strikethrough{
+    cursor: pointer;
+    -webkit-user-select: none; /* Chrome/Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+    
+    /* Rules below not implemented in browsers yet */
+    -o-user-select: none;
+    user-select: none;
+}
