@@ -1,8 +1,21 @@
 @extends('layout.app')
 
-@section('title', 'List')
+@section('title', 'ToDo List')
 
 @section('content')
+
+    @if (session('success'))
+        <div class="alert alert-success text-center">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('errors'))
+        <div class="alert alert-success text-center">
+            {{ session('errors') }}
+        </div>
+    @endif
+
     @if ($todoList->count() > 0)
         <table class="table table-hover">
             <thead>
@@ -17,6 +30,13 @@
                         <td>
                             <input type="checkbox" class="form-check-input" id="check-{{ $item->id }}" data-id="{{ $item->id }}" {{ $item->checked == true ? "checked" : "" }}>
                             <label for="check-{{ $item->id }}" class="strikethrough">{{ $item->value }}</label>
+                            @if ($item->image_path != "" || $item->image_path != null)
+                                <a href="{{ asset('img/uploads/' . $item->image_path) }}" target="_blank">
+                                    <svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-card-image" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9c0 .013 0 .027.002.04V12l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094L15 9.499V3.5a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13zm4.502 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                    </svg>
+                                </a>
+                            @endif
                         </td>
                         <td>
                             <a href="{{ route('list.edit', $item->id) }}">
@@ -26,10 +46,10 @@
                                 </svg>
                             </a>
 
-                            <form action="{{ route('list.destroy', $item->id) }}" method="post" style="display:inline;">
+                            <form action="{{ route('list.destroy', $item->id) }}" method="post" class="removeForm">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" style="background: transparent;border:none;padding:0;color:#de4545;">
+                                <button type="submit" class="deleteButton">
                                     <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-x-square-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
                                     </svg>

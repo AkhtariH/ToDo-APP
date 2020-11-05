@@ -15,7 +15,7 @@
 
       @section('header')
       <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="{{ asset('/img/logo.png') }}" alt="" width="72" height="72">
+        <a href="{{ route('list.index') }}"><img class="d-block mx-auto mb-4" src="{{ asset('/img/logo.png') }}" alt="" width="72" height="72"></a>
         <h2>ToDo List</h2>
         <p class="lead">This is a ToDo app built for an assessment by Dropper.</p>
       </div>
@@ -31,8 +31,8 @@
       <footer class="my-5 pt-5 text-muted text-center text-small">
         <p class="mb-1">&copy; 2020 Hemran Akhtari</p>
         <ul class="list-inline">
-          <li class="list-inline-item"><a href="#">GitHub</a></li>
-          <li class="list-inline-item"><a href="#">LinkedIn</a></li>
+          <li class="list-inline-item"><a href="https://github.com/AkhtariH/ToDo-APP">GitHub</a></li>
+          <li class="list-inline-item"><a href="https://www.linkedin.com/in/hemran-akhtari/">LinkedIn</a></li>
         </ul>
       </footer>
       @show

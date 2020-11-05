@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Todo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class TodoController extends Controller
 {
@@ -38,29 +39,27 @@ class TodoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'value' => 'required'
+            'value' => 'required',
+            'image_path' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-        Todo::create($request->all());
+        $data = collect(['value' => $request->value]);
+
+        if ($request->has('image_path')) {
+            $imageName = time() . '.' . $request->image_path->extension();  
+            $request->image_path->move(public_path('img/uploads/'), $imageName);
+            $data->put('image_path', $imageName);
+        }
+    
+        Todo::create($data->toArray());
 
         return redirect()->route('list.index')->with('success', 'Item was added!');
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Todo  $todo
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Todo $todo)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Todo  $id
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -73,17 +72,38 @@ class TodoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Todo  $id
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $request->validate([
             'value' => 'required',
+            'image_path' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
+        $data = collect(['value' => $request->value]);
         $item = Todo::findOrFail($id);
-        $item->update($request->all());
+
+        if ($request->has('image_path')) {
+            $imageName = time() . '.' . $request->image_path->extension();  
+            $request->image_path->move(public_path('img/uploads/'), $imageName);
+            $data->put('image_path', $imageName);
+
+            if(File::exists(public_path('img/uploads/' . $item->image_path))){
+                File::delete(public_path('img/uploads/' . $item->image_path));
+            }
+        }
+
+        if ($request->has('remove')){
+            if(File::exists(public_path('img/uploads/' . $item->image_path))){
+                File::delete(public_path('img/uploads/' . $item->image_path));
+            }
+            
+            $data->put('image_path', null);
+        }
+
+        $item->update($data->toArray());
 
         return redirect()->route('list.index')->with('success', 'Item was updated!');
     }
@@ -91,7 +111,7 @@ class TodoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Todo  $id
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -102,7 +122,11 @@ class TodoController extends Controller
         return redirect()->route('list.index')->with('success', 'Item was deleted!');
     }
 
-    // Use update method for that
+    /**
+     * Updates checked column in storage
+     *
+     * @param  \Illuminate\Http\Request  $request
+     */
     public function check(Request $request) {
         $item = Todo::findOrFail($request->input('id'));
         $item->checked = $request->input('checked');
