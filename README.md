@@ -4,14 +4,14 @@ This is a ToDo app built for an assessment by Dropper.
 
 ## Installation
 
-> git clone https://github.com/AkhtariH/ToDo-APP.git todo
+1. > git clone https://github.com/AkhtariH/ToDo-APP.git todo
 
-> cd todo
+2. > cd todo
 
-> composer install
+3. > composer install
 
-> npm install
+4. > npm install
 
-> php artisan migrate
+5. > php artisan migrate
 
-> php artisan serve
+6. > php artisan serve
