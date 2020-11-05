@@ -1,7 +1,5 @@
 # ToDo List APP
 
-## About
-
 This is a ToDo app built for an assessment by Dropper.
 
 ## Installation
