@@ -15,7 +15,7 @@ use App\Http\Controllers\TodoController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('list.index');
 });
 
 Route::post('check', 'App\Http\Controllers\TodoController@check');
