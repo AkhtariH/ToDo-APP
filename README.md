@@ -4,7 +4,7 @@ This is a ToDo app built for an assessment by Dropper.
 
 ## Installation
 
-1. > git clone https://github.com/AkhtariH/ToDo-APP.git todo
+1. ``` git clone https://github.com/AkhtariH/ToDo-APP.git todo ```
 
 2. > cd todo
 
