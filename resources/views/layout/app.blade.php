@@ -31,8 +31,8 @@
       <footer class="my-5 pt-5 text-muted text-center text-small">
         <p class="mb-1">&copy; 2020 Hemran Akhtari</p>
         <ul class="list-inline">
-          <li class="list-inline-item"><a href="https://github.com/AkhtariH/ToDo-APP">GitHub</a></li>
-          <li class="list-inline-item"><a href="https://www.linkedin.com/in/hemran-akhtari/">LinkedIn</a></li>
+          <li class="list-inline-item"><a href="https://github.com/AkhtariH/ToDo-APP" target="_blank">GitHub</a></li>
+          <li class="list-inline-item"><a href="https://www.linkedin.com/in/hemran-akhtari/" target="_blank">LinkedIn</a></li>
         </ul>
       </footer>
       @show
