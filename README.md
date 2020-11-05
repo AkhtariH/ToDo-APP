@@ -10,7 +10,7 @@ This CRUD app should fullfill these requirements:
 - Editing an item
 - Deleting an item
 - Adding and image to an item
-- Checking an item
+- Checking an item (by clicking on item)
 
 The points above have to be stored in a database so that the user can refresh the page and keep the data.
 
