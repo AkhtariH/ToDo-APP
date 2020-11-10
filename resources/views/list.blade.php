@@ -10,12 +10,6 @@
         </div>
     @endif
 
-    @if (session('errors'))
-        <div class="alert alert-success text-center">
-            {{ session('errors') }}
-        </div>
-    @endif
-
     @if ($todoList->count() > 0)
         <table class="table table-hover">
             <thead>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Todo;
+use App\Http\Requests\TodoRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -36,12 +37,9 @@ class TodoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TodoRequest $request)
     {
-        $request->validate([
-            'value' => 'required',
-            'image_path' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
+        $request->validated();
 
         $data = collect(['value' => $request->value]);
 
@@ -75,12 +73,9 @@ class TodoController extends Controller
      * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TodoRequest $request, $id)
     {
-        $request->validate([
-            'value' => 'required',
-            'image_path' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
+        $request->validated();
 
         $data = collect(['value' => $request->value]);
         $item = Todo::findOrFail($id);

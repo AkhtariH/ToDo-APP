@@ -11,7 +11,7 @@ $(function() {
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: '/check',
+            url: 'check',
             data: { id: dataID, checked: answer }
         }); 
 
